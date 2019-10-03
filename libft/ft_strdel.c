@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Created: 2019/09/08 17:05:45 by equiana           #+#    #+#             */
+/*   Updated: 2019/09/13 14:18:57 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_strdel(char **as)
 {
-	int fd;
-
-	if (argc != 2)
+	if (as != NULL && *as != NULL)
 	{
-		ft_putstr("invalide arguments\n");
-		return (0);
+		free(*as);
+		*as = NULL;
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr("open() fail\n");
-		return (0);
-	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("all good!!\n");
-	close(fd);
-	return (0);
 }

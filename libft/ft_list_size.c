@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Created: 2019/07/16 09:47:06 by equiana           #+#    #+#             */
+/*   Updated: 2019/09/14 19:11:57 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_list_size(t_list *begin_list)
 {
-	int fd;
+	int		i;
+	t_list	*tmp;
 
-	if (argc != 2)
+	i = 0;
+	tmp = begin_list;
+	while (tmp)
 	{
-		ft_putstr("invalide arguments\n");
-		return (0);
+		tmp = tmp->next;
+		i++;
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr("open() fail\n");
-		return (0);
-	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("all good!!\n");
-	close(fd);
-	return (0);
+	return (i);
 }

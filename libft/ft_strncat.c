@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Created: 2019/07/08 20:37:39 by equiana           #+#    #+#             */
+/*   Updated: 2019/09/10 17:37:46 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strncat(char *dest, const char *src, size_t nb)
 {
-	int fd;
+	size_t i;
+	size_t count;
 
-	if (argc != 2)
+	i = 0;
+	count = 0;
+	while (dest[count] != '\0')
 	{
-		ft_putstr("invalide arguments\n");
-		return (0);
+		count++;
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	while ((src[i] != '\0') && i < nb)
 	{
-		ft_putstr("open() fail\n");
-		return (0);
+		dest[count] = src[i];
+		count++;
+		i++;
 	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("all good!!\n");
-	close(fd);
-	return (0);
+	dest[count] = '\0';
+	return (dest);
 }

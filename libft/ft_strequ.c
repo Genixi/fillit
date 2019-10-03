@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Created: 2019/09/08 18:10:22 by equiana           #+#    #+#             */
+/*   Updated: 2019/09/13 14:19:57 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_strequ(char const *s1, char const *s2)
 {
-	int fd;
+	int i;
 
-	if (argc != 2)
+	i = 0;
+	if (s1 == NULL || s2 == NULL)
 	{
-		ft_putstr("invalide arguments\n");
+		if (s1 == NULL && s2 == NULL)
+			return (1);
 		return (0);
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	while (s1[i] != '\0' || s2[i] != '\0')
 	{
-		ft_putstr("open() fail\n");
-		return (0);
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
 	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
+	if (s1[i] != s2[i])
 		return (0);
-	}
-	ft_putstr("all good!!\n");
-	close(fd);
-	return (0);
+	return (1);
 }

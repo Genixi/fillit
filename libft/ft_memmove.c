@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Created: 2019/09/06 15:27:13 by equiana           #+#    #+#             */
+/*   Updated: 2019/09/12 15:06:51 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int fd;
+	size_t				i;
+	unsigned char		*dst_def;
+	const unsigned char	*src_def;
 
-	if (argc != 2)
-	{
-		ft_putstr("invalide arguments\n");
-		return (0);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr("open() fail\n");
-		return (0);
-	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("all good!!\n");
-	close(fd);
-	return (0);
+	i = 0;
+	dst_def = (unsigned char*)dst;
+	src_def = (const unsigned char*)src;
+	if (dst_def > src_def)
+		while (len--)
+			dst_def[len] = src_def[len];
+	else if (src_def > dst_def)
+		while (len > i)
+		{
+			dst_def[i] = src_def[i];
+			i++;
+		}
+	return (dst);
 }

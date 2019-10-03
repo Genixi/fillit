@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Created: 2019/09/08 18:42:16 by equiana           #+#    #+#             */
+/*   Updated: 2019/09/13 15:54:43 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int fd;
+	unsigned int	i;
+	char			*str;
 
-	if (argc != 2)
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	str = (char*)malloc(sizeof(char) * (len + 1));
+	if (str == NULL || len > len + 1)
+		return (NULL);
+	while (i < len)
 	{
-		ft_putstr("invalide arguments\n");
-		return (0);
+		str[i] = s[start + i];
+		i++;
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr("open() fail\n");
-		return (0);
-	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("all good!!\n");
-	close(fd);
-	return (0);
+	str[i] = '\0';
+	return (str);
 }

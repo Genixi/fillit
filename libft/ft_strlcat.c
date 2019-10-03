@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Created: 2019/09/06 19:34:48 by equiana           #+#    #+#             */
+/*   Updated: 2019/09/11 22:50:29 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int fd;
+	size_t i;
+	size_t j;
+	size_t val;
 
-	if (argc != 2)
+	i = 0;
+	j = 0;
+	val = 0;
+	while (dst[i] != '\0')
+		i++;
+	while (src[val] != '\0')
+		val++;
+	if (size <= i)
+		val = val + size;
+	else
+		val = val + i;
+	while (src[j] != '\0' && i + 1 < size)
 	{
-		ft_putstr("invalide arguments\n");
-		return (0);
+		dst[i] = src[j];
+		i++;
+		j++;
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr("open() fail\n");
-		return (0);
-	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("all good!!\n");
-	close(fd);
-	return (0);
+	dst[i] = '\0';
+	return (val);
 }
