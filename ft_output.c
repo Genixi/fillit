@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_output.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:44:45 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/05 15:49:21 by equiana          ###   ########.fr       */
+/*   Created: 2019/10/05 13:47:07 by equiana           #+#    #+#             */
+/*   Updated: 2019/10/05 16:26:44 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-
-# define FILLIT_H
-# define BUFF_SIZE 21
-
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include "libft/libft.h"
-
-int				ft_validate(int fd, char *buf);
-t_list			*ft_read_in(int fd);
-void			ft_error(void);
-void			ft_output(t_list *lst);
-
-typedef struct	s_figure
+#include "fillit.h"
+#include "libft/libft.h"
+#include <stdio.h>
+void ft_error(void)
 {
-	char letter;
-	char *arr;
-}				t_figure;
+	ft_putstr("error\n");
+	exit (0);
+}
 
-#endif
+void ft_output(t_list *lst)
+{
+	t_list *tmp;
+	char ch;
+
+//	printf("ft_output start here\n");	
+	tmp = lst;
+//	printf("tmp = NULL?: %d\n", (tmp == NULL));
+	while (tmp)
+	{
+		ch = ((t_figure*)(tmp->content))->letter;
+		ft_putchar(ch);
+		ft_putchar('\n');
+		tmp = tmp->next;
+	}
+}

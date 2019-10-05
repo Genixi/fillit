@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:15 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/05 16:29:09 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,8 @@ int main(int argc, char **argv)
 		ft_putstr("open() fail\n");
 		return (0);
 	}
-	if (!validate(fd))
-	{
-		ft_putstr("error\n");
-		return (0);
-	}
-	ft_putstr("all good!!\n");
+	ft_output(ft_read_in(fd));
+	ft_putstr("all good\n");
 	close(fd);
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate.c                                         :+:      :+:    :+:   */
+/*   ft_validate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:47:06 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/03 21:23:11 by equiana          ###   ########.fr       */
+/*   Created: 2019/10/05 13:37:00 by equiana           #+#    #+#             */
+/*   Updated: 2019/10/05 15:08:10 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,13 @@ int	check_matrix(char *str)
 	return (1);
 }
 
-int	validate(int fd)
+int	ft_validate(int ret, char *buf)
 {
-	int		ret;
-	int		i;
-	char	buf[BUFF_SIZE + 1];
-	char	*last_line;
-
-	i = 1;
-	ret = 1;
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
-	{
-		buf[ret] = '\0';
-		if (!check_size(ret, buf))
-			return (0);
-		if (!check_matrix(buf))
-			return (0);
-		last_line = buf;
-		i++;
-	}
-	if (ret == 0 && ft_strlen(last_line) != 20)
+	if (ret && !check_size(ret, buf))
+		return (0);
+	if (ret && !check_matrix(buf))
+		return (0);
+	if (!ret && ft_strlen(buf) != 20)
 		return (0);
 	return (1);
 }
