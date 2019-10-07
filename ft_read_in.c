@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 13:25:39 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/05 16:26:06 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/07 17:16:04 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,87 @@ void ft_form_list(t_list **begin, t_list *new)
 	}
 }
 
+int ft_get_height(char **str)
+{
+	int i;
+	int j;
+	int size;	
+	int last;
+	int first;
+	
+	i = 0;
+	last = -1;
+	first = -1;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == '#')
+			{
+				if (first == -1)
+					first = i;
+				if (last == -1 || i > last)
+					last = i;
+			}
+			j++;
+		}
+		i++;
+	}
+	size = last - first + 1;
+	if (!size && first != -1)
+		size = 1;
+	return size;
+}
+
+int ft_get_width(char **str)
+{
+	int i;
+	int j;
+	int last;
+	int first;
+	int size;
+
+	i = 0;
+	last = -1;
+	first = -1;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == '#')
+			{
+				if (j < first || first == -1)
+					first = j;
+				if (j > last || last == -1)
+					last = j;
+			}
+			j++;
+		}
+		i++;
+	}
+	size = last - first + 1;	
+	if (!size && first != -1)
+		size = 1;
+	return size;
+}
+
 t_list	*ft_get_figure(char letter, char *buf)
 {
 	t_list *tmp;
+	char **field;
 	t_figure *figure;
 
 	if (!(figure = (t_figure*)malloc(sizeof(t_figure))))
 		ft_error();
+	field = ft_strsplit(buf, '\n');
 	figure->letter = letter;
-	figure->arr = buf;
+	figure->arr = field;	
+	figure->width = ft_get_width(field);
+	figure->height = ft_get_height(field);
+	ft_get_xy(field, &figure);
 	tmp = ft_lstnew(figure, sizeof(t_figure));
-//	printf("element char: %c\n", ((t_figure*)(tmp->content))->letter);
-//	printf("element size: %zu\n", (tmp->content_size));
 	return (tmp);
 }
 
@@ -65,8 +134,6 @@ t_list *ft_read_in(int fd)
 			ft_error();
 		l_line = buf;
 		ft_form_list(&lst, ft_get_figure(letter, buf));
-//		printf("letter: %c\n", letter);
-//		printf("lst still null?: %d\n", (lst == NULL));
 		letter++;
 	}
 	if (!ft_validate(ret, l_line))

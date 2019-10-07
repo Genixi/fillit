@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   support.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/07 15:49:17 by equiana          ###   ########.fr       */
+/*   Created: 2019/10/07 15:25:03 by equiana           #+#    #+#             */
+/*   Updated: 2019/10/07 16:33:42 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
-
-int main(int argc, char **argv)
+#include <stdio.h>
+void ft_get_xy(char **str, t_figure **figure)
 {
-	int fd;
+	int i;
+	int j;
 
-	if (argc != 2)
+	i = 0;
+	while (str[i])
 	{
-		ft_putstr("invalide arguments\n");
-		return (0);
+		j = 0;
+		while(str[i][j])
+		{
+			if (str[i][j] == '#')
+				break ;
+			j++;
+		}
+		if (str[i][j] == '#')
+			break ;
+		i++;
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr("open() fail\n");
-		return (0);
-	}
-	ft_output(ft_read_in(fd));
-	ft_putstr("all good\n");
-	close(fd);
-	return (0);
+	(*figure)->x = i;
+	(*figure)->y = j;
 }
