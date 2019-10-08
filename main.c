@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/07 15:49:17 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/08 19:48:43 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int main(int argc, char **argv)
 		ft_putstr("open() fail\n");
 		return (0);
 	}
-	ft_output(ft_read_in(fd));
+//	ft_output(ft_read_in(fd));
+	ft_put_field(ft_find_solution(ft_read_in(fd)));
 	ft_putstr("all good\n");
 	close(fd);
 	return (0);
