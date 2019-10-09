@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 15:25:03 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/08 14:40:18 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/09 16:26:52 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void ft_put_field(char **str)
 	i = 0;
 	while (str[i])
 	{
-//		ft_putstr(str[i]);
-//		ft_putchar('\n');
 		printf("%s\n", str[i]);
 		i++;
 	}
@@ -87,9 +85,7 @@ void ft_output(t_list *lst)
 	int x;
 	int y;
 
-//	printf("ft_output start here\n");	
 	tmp = lst;
-//	printf("tmp = NULL?: %d\n", (tmp == NULL));
 	while (tmp)
 	{
 		ch = ((t_figure*)(tmp->content))->letter;

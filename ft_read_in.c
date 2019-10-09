@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 13:25:39 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/08 19:48:39 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/09 15:19:46 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,6 @@ t_list *ft_read_in(int fd)
 	}
 	if (!ft_validate(ret, l_line))
 		ft_error();
-	printf("ft_read_in return\n");
+//	printf("ft_read_in return\n");
 	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 12:50:43 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/08 19:50:37 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/09 18:20:23 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char **ft_field_gen(int size)
 	return (field);	
 }
 
-int ft_check_place(char **field, int i, int j, t_figure *figure)
+int ft_check(char **field, int i, int j, t_figure *figure)
 {
 	int k;
 	int l;
@@ -50,20 +50,31 @@ int ft_check_place(char **field, int i, int j, t_figure *figure)
 	y_f = figure->y;
 	str = figure->arr;
 	size = ft_strlen(field[0]);
+//	printf("checking position i: %d, j:%d at field:\n", i, j);
+	ft_put_field(field);
+//	printf("with figure:\n");
+	ft_put_field(str);
 	while (str[figure->x + k])
 	{
 		l = 0;
 		while (str[figure->x + k][l])
 		{
-			if ((i + k >= size || j + l >= size) && str[figure->x + k][l] != '.')
+			if ((i + k >= size || j + l - y_f >= size) && str[figure->x + k][l] != '.')
+			{
+//				printf("check failed case 1 i+k: %d, j+l: %d str: %c\n", i+k, j+l, str[figure->x+k][l]);
 				return (0);
-			if (i + k < size && j + l < size)
+			}
+			if (i + k < size && j + l - y_f < size)		
 				if (field[i + k][j + (l - y_f)] != '.' && str[figure->x + k][l] != '.')
+				{
+//					printf("check failed case 2 i+k: %d, j+l: %d str: %c\n", i+k, j+l, str[figure->x+k][l]);
 					return (0);
+				}
 			l++;
 		}
 		k++;
 	}
+//	printf("check passed!!\n");
 	return (1);				
 }
 
@@ -72,27 +83,23 @@ void ft_place_figure(char ***field, int i, int j, t_figure *figure)
 	int k;
 	int l;
 	char **tmp;
-	char **str;
 	int count;
 	
 	k = 0;
-	l = 0;
 	count = 0;
 	tmp = *field;
-	str = figure->arr;
-	while (str[figure->x + k])
+	while ((figure->arr)[figure->x + k])
 	{
 		l = 0;
-		while (str[figure->x + k][l])
+		while ((figure->arr)[figure->x + k][l])
 		{
-			if (str[figure->x + k][l] == '#')
+			if ((figure->arr)[figure->x + k][l] == '#')
 			{
 				tmp[i + k][j + (l - figure->y)] = figure->letter;
-				if(++count == 4)
+				count++;
+				if(count == 4)
 					return ;
 			}
-			if (figure->letter == 'D')
-//				printf("row for D: %d, column for D: %d\n", i+k, j+l);
 			l++;
 		}
 		k++;
@@ -115,13 +122,9 @@ int ft_recursion(char ***field, t_list *lst)
 		while(str[i][j])
 		{
 			figure = (t_figure*)(lst->content);
-//			printf("working with figure: %c\n", figure->letter);
-			if (ft_check_place(str, i, j, figure))
+			if (ft_check(str, i, j, figure))
 			{
 				ft_place_figure(field, i, j, figure);
-				// check point
-//				printf("place new figure\n");
-				ft_put_field(str);
 				if (!lst->next || ft_recursion(field, lst->next))
 					return (1);
 				else
@@ -136,27 +139,18 @@ int ft_recursion(char ***field, t_list *lst)
 
 char **ft_find_solution(t_list *lst)
 {
-	int i;
 	int size;
 	char **field;
 
-	i = 4;
-	printf("start find_solution\n");
-	ft_output(lst);
-	while (!(size = ft_sqrt(ft_list_size(lst) * i)))
-		i++;
+//	ft_output(lst);
+	size = 2;
 	field = ft_field_gen(size);
-//  check point:
-	printf("new field, size: %d\n", size);
-	ft_put_field(field);
 	while(!ft_recursion(&field, lst))
 	{
 		free(field);
 		size++;
 		field = ft_field_gen(size);
-//	check point
-		printf("new field, size: %d\n", size);
-		ft_put_field(field);
 	}
+//	printf("final size: %d\n", size);
 	return (field);
 }
