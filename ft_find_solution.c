@@ -6,18 +6,18 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 12:50:43 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/09 18:20:23 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/10 19:48:58 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
-#include <stdio.h>
-char **ft_field_gen(int size)
+
+char	**ft_field_gen(int size)
 {
-	int i;
-	int j;
-	char **field;
+	int		i;
+	int		j;
+	char	**field;
 
 	i = 0;
 	if (!(field = (char**)malloc(sizeof(char*) * (size + 1))))
@@ -35,56 +35,45 @@ char **ft_field_gen(int size)
 		}
 		i++;
 	}
-	return (field);	
+	return (field);
 }
 
-int ft_check(char **field, int i, int j, t_figure *figure)
+int		ft_check(char **fld, int i, int j, t_figure *fgr)
 {
-	int k;
-	int l;
-	int y_f;
-	int size;
-	char **str;
-	
-	k = 0;
-	y_f = figure->y;
-	str = figure->arr;
-	size = ft_strlen(field[0]);
-//	printf("checking position i: %d, j:%d at field:\n", i, j);
-	ft_put_field(field);
-//	printf("with figure:\n");
-	ft_put_field(str);
-	while (str[figure->x + k])
+	int		k;
+	int		l;
+	int		y_f;
+	int		size;
+	char	**str;
+
+	k = -1;
+	y_f = fgr->y;
+	str = fgr->arr;
+	size = ft_strlen(fld[0]);
+	while (str[fgr->x + (++k)])
 	{
 		l = 0;
-		while (str[figure->x + k][l])
+		while (str[fgr->x + k][l])
 		{
-			if ((i + k >= size || j + l - y_f >= size) && str[figure->x + k][l] != '.')
-			{
-//				printf("check failed case 1 i+k: %d, j+l: %d str: %c\n", i+k, j+l, str[figure->x+k][l]);
-				return (0);
-			}
-			if (i + k < size && j + l - y_f < size)		
-				if (field[i + k][j + (l - y_f)] != '.' && str[figure->x + k][l] != '.')
-				{
-//					printf("check failed case 2 i+k: %d, j+l: %d str: %c\n", i+k, j+l, str[figure->x+k][l]);
+			if (str[fgr->x + k][l] != '.')
+				if (i + k >= size || j + l - y_f >= size)
 					return (0);
-				}
+			if (i + k < size && j + l - y_f < size)
+				if (fld[i + k][j + l - y_f] != '.' && str[fgr->x + k][l] != '.')
+					return (0);
 			l++;
 		}
-		k++;
 	}
-//	printf("check passed!!\n");
-	return (1);				
+	return (1);
 }
 
-void ft_place_figure(char ***field, int i, int j, t_figure *figure)
+void	ft_place_figure(char ***field, int i, int j, t_figure *figure)
 {
-	int k;
-	int l;
-	char **tmp;
-	int count;
-	
+	int		k;
+	int		l;
+	char	**tmp;
+	int		count;
+
 	k = 0;
 	count = 0;
 	tmp = *field;
@@ -97,7 +86,7 @@ void ft_place_figure(char ***field, int i, int j, t_figure *figure)
 			{
 				tmp[i + k][j + (l - figure->y)] = figure->letter;
 				count++;
-				if(count == 4)
+				if (count == 4)
 					return ;
 			}
 			l++;
@@ -106,29 +95,26 @@ void ft_place_figure(char ***field, int i, int j, t_figure *figure)
 	}
 }
 
-int ft_recursion(char ***field, t_list *lst)
+int		ft_recursion(char ***field, t_list *lst)
 {
-	int i;
-	int j;
-	t_figure *figure;
-	char **str;
+	int			i;
+	int			j;
+	char		**str;
 
 	i = 0;
-	j = 0;
 	str = *field;
 	while (str[i])
 	{
 		j = 0;
-		while(str[i][j])
+		while (str[i][j])
 		{
-			figure = (t_figure*)(lst->content);
-			if (ft_check(str, i, j, figure))
+			if (ft_check(str, i, j, (t_figure*)(lst->content)))
 			{
-				ft_place_figure(field, i, j, figure);
+				ft_place_figure(field, i, j, (t_figure*)(lst->content));
 				if (!lst->next || ft_recursion(field, lst->next))
 					return (1);
 				else
-					ft_clear_figure(field, figure);
+					ft_clear_figure(field, (t_figure*)(lst->content));
 			}
 			j++;
 		}
@@ -137,20 +123,22 @@ int ft_recursion(char ***field, t_list *lst)
 	return (0);
 }
 
-char **ft_find_solution(t_list *lst)
+char	**ft_find_solution(t_list *lst)
 {
-	int size;
-	char **field;
+	int		size;
+	int		len;
+	char	**field;
 
-//	ft_output(lst);
 	size = 2;
+	len = ft_list_size(lst);
+	while (size * size < len * 4)
+		size++;
 	field = ft_field_gen(size);
-	while(!ft_recursion(&field, lst))
+	while (!ft_recursion(&field, lst))
 	{
 		free(field);
 		size++;
 		field = ft_field_gen(size);
 	}
-//	printf("final size: %d\n", size);
 	return (field);
 }
