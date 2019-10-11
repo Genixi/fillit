@@ -6,12 +6,12 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 15:25:03 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/10 19:54:12 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 13:15:08 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 void	ft_get_xy(char **str, t_figure **figure)
 {
@@ -55,6 +55,7 @@ void	ft_clear_figure(char ***field, t_figure *figure)
 		}
 		i++;
 	}
+
 }
 
 void	ft_error(void)
@@ -79,19 +80,12 @@ void	ft_put_field(char **str)
 void	ft_output(t_list *lst)
 {
 	t_list	*tmp;
-	char	ch;
-	char	**str;
-	int		x;
-	int		y;
 
 	tmp = lst;
 	while (tmp)
 	{
-		ch = ((t_figure*)(tmp->content))->letter;
-		str = ((t_figure*)(tmp->content))->arr;
-		x = ((t_figure*)(tmp->content))->x;
-		y = ((t_figure*)(tmp->content))->y;
-		ft_put_field(str);
+		ft_put_field(((t_figure*)(tmp->content))->arr);
 		tmp = tmp->next;
 	}
+	free(tmp);
 }

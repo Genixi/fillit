@@ -6,12 +6,12 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/10 17:14:28 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 13:02:59 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 int	main(int argc, char **argv)
 {
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr("invalide arguments\n");
+		ft_putstr("invalid arguments\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);

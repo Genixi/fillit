@@ -6,12 +6,12 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 13:25:39 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/10 16:35:21 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 12:02:24 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 void	ft_form_list(t_list **begin, t_list *new)
 {

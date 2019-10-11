@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:44:45 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/10 16:32:36 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 12:31:25 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 typedef struct	s_figure
 {

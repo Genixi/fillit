@@ -6,12 +6,12 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 13:37:00 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/10 19:22:48 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 12:02:40 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 int	check_size(int ret, char *str)
 {

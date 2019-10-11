@@ -6,12 +6,12 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 12:50:43 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/10 19:48:58 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 12:02:07 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 char	**ft_field_gen(int size)
 {
