@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 12:50:43 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 12:02:07 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 15:43:51 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ char	**ft_find_solution(t_list *lst)
 {
 	int		size;
 	int		len;
+	int		i;
 	char	**field;
 
 	size = 2;
@@ -136,9 +137,13 @@ char	**ft_find_solution(t_list *lst)
 	field = ft_field_gen(size);
 	while (!ft_recursion(&field, lst))
 	{
+		i = -1;
+		while (field[++i])
+			ft_strdel(&(field[i]));
 		free(field);
 		size++;
 		field = ft_field_gen(size);
 	}
+	ft_lstdelall(&lst);
 	return (field);
 }

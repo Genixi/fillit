@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 15:25:03 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 13:15:08 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 15:34:49 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	ft_clear_figure(char ***field, t_figure *figure)
 		}
 		i++;
 	}
-
 }
 
 void	ft_error(void)
@@ -73,8 +72,10 @@ void	ft_put_field(char **str)
 	{
 		ft_putstr(str[i]);
 		ft_putchar('\n');
+		ft_strdel(&(str[i]));
 		i++;
 	}
+	free(str);
 }
 
 void	ft_output(t_list *lst)

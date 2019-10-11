@@ -1,34 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 15:34:09 by equiana          ###   ########.fr       */
+/*   Created: 2019/09/09 17:09:32 by equiana           #+#    #+#             */
+/*   Updated: 2019/10/11 15:42:25 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_lstdelall(t_list **alst)
 {
-	int fd;
+	t_list *tmp;
+	t_list *ttmp;
 
-	if (argc != 2)
+	tmp = *alst;
+	ttmp = tmp;
+	while (tmp)
 	{
-		ft_putstr("invalid arguments\n");
-		return (0);
+		ttmp = tmp;
+		if (tmp->next)
+			tmp = tmp->next;
+		else
+			tmp = NULL;
+		del_content((t_figure*)(ttmp->content));
+		free(ttmp);
 	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	*alst = NULL;
+}
+
+void	del_content(t_figure *tmp)
+{
+	int		i;
+	char	**str;
+
+	i = 0;
+	str = tmp->arr;
+	while (str[i])
 	{
-		ft_putstr("open() fail\n");
-		return (0);
+		ft_strdel(&str[i]);
+		i++;
 	}
-	ft_put_field(ft_find_solution(ft_read_in(fd)));
-	close(fd);
-	return (0);
+	free(str);
 }
