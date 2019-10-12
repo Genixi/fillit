@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_in.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bpole <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/05 13:25:39 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/12 10:09:43 by equiana          ###   ########.fr       */
+/*   Created: 2019/10/12 12:38:52 by bpole             #+#    #+#             */
+/*   Updated: 2019/10/12 12:39:06 by bpole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_form_list(t_list **begin, t_list *new)
 	t_list *tmp;
 
 	if (*begin == NULL)
-		ft_lstadd(begin, new);
+		*begin = new;
 	else
 	{
 		tmp = *begin;
@@ -65,7 +65,7 @@ t_list	*ft_read_in(int fd)
 		ft_form_list(&lst, ft_get_figure(letter, buf));
 		letter++;
 	}
-	if (!ft_validate(ret, l_line))
+	if (!ft_validate(ret, l_line) || letter > 'Z' + 1)
 		ft_error();
 	return (lst);
 }
