@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 13:25:39 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 15:43:47 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/12 10:09:43 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ t_list	*ft_get_figure(char letter, char *buf)
 	figure->arr = field;
 	ft_get_xy(field, &figure);
 	tmp = ft_lstnew(figure, sizeof(t_figure));
-	free(*field);
-	free(field);
-	del_content(figure);
 	free(figure);
 	return (tmp);
 }

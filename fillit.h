@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:44:45 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 15:43:54 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/12 10:38:33 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void			ft_clear_figure(char ***field, t_figure *figure);
 void			ft_error(void);
 void			ft_lstdelall(t_list **alst);
 void			del_content(t_figure *tmp);
-void			ft_output(t_list *lst);
 void			ft_put_field(char **str);
 char			**ft_find_solution(t_list *lst);
 

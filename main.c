@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 20:30:17 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 15:34:09 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/11 12:02:55 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr("invalid arguments\n");
+		ft_putstr("invalide arguments\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 12:50:43 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 15:43:51 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/12 10:20:07 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	**ft_find_solution(t_list *lst)
 	{
 		i = -1;
 		while (field[++i])
-			ft_strdel(&(field[i]));
+			ft_strdel(&field[i]);
 		free(field);
 		size++;
 		field = ft_field_gen(size);

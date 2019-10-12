@@ -6,7 +6,7 @@
 /*   By: equiana <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 17:09:32 by equiana           #+#    #+#             */
-/*   Updated: 2019/10/11 15:42:25 by equiana          ###   ########.fr       */
+/*   Updated: 2019/10/12 11:15:52 by equiana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 void	ft_lstdelall(t_list **alst)
 {
-	t_list *tmp;
-	t_list *ttmp;
+	int		i;
+	t_list	*tmp;
+	t_list	*ttmp;
 
 	tmp = *alst;
-	ttmp = tmp;
 	while (tmp)
 	{
 		ttmp = tmp;
@@ -27,9 +27,14 @@ void	ft_lstdelall(t_list **alst)
 			tmp = tmp->next;
 		else
 			tmp = NULL;
-		del_content((t_figure*)(ttmp->content));
+		i = -1;
+		while ((((t_figure*)(ttmp->content))->arr)[++i])
+			ft_strdel(&((((t_figure*)(ttmp->content))->arr[i])));
+		free(((t_figure*)(ttmp->content))->arr);
+		free((t_figure*)(ttmp->content));
 		free(ttmp);
 	}
+	free(tmp);
 	*alst = NULL;
 }
 
